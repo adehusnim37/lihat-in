@@ -8,7 +8,6 @@ const shorten = require('./routes/api/shorten')
 const path = require("path");
 const app = express();
 
-const __dirname = path.resolve()
 
 //productionmode
 if(process.env.NODE_ENV === 'production') {
