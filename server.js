@@ -5,8 +5,21 @@ const dotenv = require('dotenv').config()
 const redirect = require('./routes/api/redirect')
 
 const shorten = require('./routes/api/shorten')
+const path = require("path");
 const app = express();
 
+const __dirname = path.resolve()
+
+//productionmode
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '/lihatinreact/src')))
+
+    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'lihatinreact', 'build', 'App.js')))
+}else {
+    app.get('/', (req,res) => {
+        res.send('api running')
+    })
+}
 
 //body-parser
 app.use(bodyParser.urlencoded({ extended: false }))
