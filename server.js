@@ -30,7 +30,7 @@ app.get('/:hash', (req,res) => {
     }, (err,doc) => {
         if(doc){
             console.log(doc.url)
-            res.redirect('http://' + doc.url)
+            res.redirect('https://' + doc.url)
         }else {
             res.redirect('/')
         }
