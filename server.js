@@ -15,27 +15,27 @@ app.use(bodyParser.json());
 // uri key mongo
 const db = process.env.MONGODB_URI
 
-mongoose.connect(db).then(()=> console.log('berhasil terhubung ke database')).catch( onerror=> console.log(onerror))
+mongoose.connect(db).then(() => console.log('berhasil terhubung ke database')).catch(onerror => console.log(onerror))
 
 
 app.use(express.json({ extended: false }));
 app.use(express.static(path.join(__dirname, "/public")));
 
 
-app.get('/',(req,res) => {
+app.get('/', (req, res) => {
     res.send('halo dunia')
     console.log(dotenv.parsed)
 })
 
-app.get('/:hash', (req,res) => {
+app.get('/:hash', (req, res) => {
     const id = req.params.hash
     URL.findOne({
         _id: id
-    }, (err,doc) => {
-        if(doc){
+    }, (err, doc) => {
+        if (doc) {
             console.log(doc.url)
             res.redirect('https://' + doc.url)
-        }else {
+        } else {
             res.redirect('/')
         }
     })
@@ -50,10 +50,10 @@ app.use('/api/redirect', redirect)
 //productionmode
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('lihatinreact/build'))
+    app.use(express.static('client/build'))
 
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'lihatinreact', 'build', 'index.html')) // relative path
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')) // relative path
     })
 }
 

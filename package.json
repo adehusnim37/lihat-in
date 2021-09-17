@@ -4,13 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "cd lihatinreact && npm run build",
-    "install-lihatinreact": "cd lihatinreact && npm install",
-    "lihatinreact": "npm start --prefix lihatinreact",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "client": "npm start --prefix client",
     "server": "nodemon server",
-    "dev": "concurrently \"npm run server\" \"npm run lihatinreact\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "start": "node server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix lihatinreact && npm run build --prefix lihatinreact"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "Ade Husni M",
