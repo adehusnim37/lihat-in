@@ -10,13 +10,17 @@ const app = express();
 
 //body-parser
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
+app.use(bodyParser.json());
 
 // uri key mongo
 const db = process.env.MONGODB_URI
 
 mongoose.connect(db).then(()=> console.log('berhasil terhubung ke database')).catch( onerror=> console.log(onerror))
+
+
+app.use(express.json({ extended: false }));
+app.use(express.static(path.join(__dirname, "/public")));
+
 
 app.get('/',(req,res) => {
     res.send('halo dunia')
