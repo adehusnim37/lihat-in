@@ -22,10 +22,10 @@ app.use(express.json({ extended: false }));
 app.use(express.static(path.join(__dirname, "/public")));
 
 
-app.get('/', (req, res) => {
-    res.send('halo dunia')
-    console.log(dotenv.parsed)
-})
+// app.get('/', (req, res) => {
+//     res.send('halo dunia')
+//     console.log(dotenv.parsed)
+// })
 
 app.get('/:hash', (req, res) => {
     const id = req.params.hash
