@@ -8,18 +8,6 @@ const shorten = require('./routes/api/shorten')
 const path = require("path");
 const app = express();
 
-
-//productionmode
-if(process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '/lihatinreact/src')))
-
-    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'lihatinreact', 'build', 'App.js')))
-}else {
-    app.get('/', (req,res) => {
-        res.send('api running')
-    })
-}
-
 //body-parser
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -52,6 +40,18 @@ app.get('/:hash', (req,res) => {
 //routes
 app.use('/api/shorten', shorten)
 app.use('/api/redirect', redirect)
+
+
+
+//productionmode
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('lihatinreact/build'))
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'lihatinreact', 'build', 'index.html')) // relative path
+    })
+}
 
 const port = process.env.PORT || 4000
 app.listen(port, () => console.log(`Server berjalan di port ${port}`))
