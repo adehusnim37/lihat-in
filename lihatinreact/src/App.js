@@ -26,7 +26,7 @@ class App extends Component {
     } else {
       console.log('Url mu: ', this.state.url)
       //post values
-      axios.post(`http://localhost:4000/api/shorten`, {
+      axios.post(`/api/shorten`, {
         url: this.state.url
       })
           .then(res => {
